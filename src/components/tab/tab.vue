@@ -23,6 +23,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -30,16 +31,20 @@ export default {
 .tab
   display: flex;
   justify-content: space-around;
-  box-sizing: border-box;
+  font-size: 26px;
+  background: rgba(255,255,255,0.2); 
   .tab-item
     display: inline-block;
-    color: #fff;
+    color: #3d3d3d;
     width: 25%;
     text-align: center;
     font-size: 16px;
-    padding: 10px 0;
-    border-bottom: transparent solid 1px;
-    font-family: 'DroidSansbace';
+    border-bottom:  #33B3FF solid 1px;
+    transition: all .3s ease;
+    height: 48px;
+    line-height: 48px;
   .router-link-active
     border-bottom: 1px solid #fff;
+    color: #fff;
+
 </style>

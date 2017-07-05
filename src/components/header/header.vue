@@ -25,7 +25,7 @@ $logoFont: #fff;
 .my-header 
   background: $bgcolor;
   color: $logoFont;
-  height: 45px;
+  height: 40px;
   display: flex;
   justify-content: space-around;
   align-items: center;
