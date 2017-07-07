@@ -13,6 +13,15 @@
       <div class="recommend-list">
         <h1 class="list-title">热门歌曲推荐</h1>
         <ul>
+          <li v-for="li in disclist" class="recommend-item">
+            <div class="icon">
+            <img :src="li.imgurl">
+            </div>
+            <div class="item">
+              <p class="item-title" v-html="li.dissname"></p>
+              <p class="item-context" v-html="li.introduction"></p>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -20,14 +29,15 @@
 </template>
 
 <script>
-import {getRecommend} from 'api/recommend'
+import {getRecommend, getDiscList} from 'api/recommend'
 import {ERR_OK} from 'api/config'
 import slider from 'base/slider/slider'
 
 export default {
   data () {
     return {
-      recommend: []
+      recommend: [],
+      disclist: []
     }
   },
   components: {
@@ -35,6 +45,7 @@ export default {
   },
   created () {
     this._getRecommend()
+    this._getDiscList()
   },
   methods: {
     _getRecommend () {
@@ -44,6 +55,14 @@ export default {
           // console.log(res.data.slider)
         }
       })
+    },
+    _getDiscList () {
+      getDiscList().then((res) => {
+        if (res.code === ERR_OK) {
+          this.disclist = res.data.list
+          // console.log(res.data.list)
+        }
+      })
     }
   }
 }
@@ -51,16 +70,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang = "sass">
-.recommend
-  position: fixed;
-  width: 100%;
-  top: 89px;
-  bottom: 0;
-  .recommend-list
-    .list-title
-      font-size: 20px;
-      text-align: center;
-      font-weight: 300;
-      color: #fff;
-
+@import 'recommend'
 </style>

@@ -11,6 +11,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "balel-runtime": "^6.0.0",
     "better-scroll": "^0.2.4",
     "fastclick": "^1.0.6",
