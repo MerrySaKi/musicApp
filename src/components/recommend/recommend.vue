@@ -6,7 +6,7 @@
         <slider>
           <div v-for="item in recommend">
             <a :href="item.linkUrl">
-              <img :src="item.picUrl" >
+              <img :src="item.picUrl" @load = "loadImage" class="needsclick">
             </a>
           </div>
         </slider>
@@ -16,7 +16,7 @@
         <ul>
           <li v-for="li in disclist" class="recommend-item">
             <div class="icon">
-              <img :src="li.imgurl">
+              <img v-lazy="li.imgurl">
             </div>
             <div class="item">
               <p class="item-title" v-html="li.dissname"></p>
@@ -25,6 +25,10 @@
           </li>
         </ul>
       </div>
+      
+      </div>
+      <div class="loading-container">
+        <loading v-show="!disclist.length"></loading>
       </div>
     </scroll>
   </div>
@@ -35,6 +39,7 @@ import {getRecommend, getDiscList} from 'api/recommend'
 import {ERR_OK} from 'api/config'
 import slider from 'base/slider/slider'
 import Scroll from 'base/scroll/scroll'
+import loading from 'base/loading/loading'
 export default {
   data () {
     return {
@@ -44,7 +49,8 @@ export default {
   },
   components: {
     slider,
-    Scroll
+    Scroll,
+    loading
   },
   created () {
     this._getRecommend()
@@ -66,6 +72,12 @@ export default {
           // console.log(res.data.list)
         }
       })
+    },
+    loadImage () {
+      if (!this.isloadImage) {
+        this.$refs.scroll.refresh()
+        this.isloadImage = true
+      }
     }
   }
 }
@@ -74,4 +86,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang = "sass">
 @import 'recommend'
+
+.loading-container
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%)
+  .loading
+    
 </style>
