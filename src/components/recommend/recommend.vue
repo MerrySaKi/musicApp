@@ -1,6 +1,7 @@
 <template>
-  <div class="recommend">
-    <div class="recommend-content">
+  <div class="recommend" ref="recommend">
+    <scroll class="recommend-content" :data="disclist" ref="scroll">
+      <div>
       <div class="slider-wrapper" v-if="recommend.length">
         <slider>
           <div v-for="item in recommend">
@@ -15,7 +16,7 @@
         <ul>
           <li v-for="li in disclist" class="recommend-item">
             <div class="icon">
-            <img :src="li.imgurl">
+              <img :src="li.imgurl">
             </div>
             <div class="item">
               <p class="item-title" v-html="li.dissname"></p>
@@ -24,7 +25,8 @@
           </li>
         </ul>
       </div>
-    </div>
+      </div>
+    </scroll>
   </div>
 </template>
 
@@ -32,7 +34,7 @@
 import {getRecommend, getDiscList} from 'api/recommend'
 import {ERR_OK} from 'api/config'
 import slider from 'base/slider/slider'
-
+import Scroll from 'base/scroll/scroll'
 export default {
   data () {
     return {
@@ -41,7 +43,8 @@ export default {
     }
   },
   components: {
-    slider
+    slider,
+    Scroll
   },
   created () {
     this._getRecommend()
