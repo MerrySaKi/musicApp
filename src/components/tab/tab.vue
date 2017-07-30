@@ -32,7 +32,7 @@ export default {
   display: flex;
   justify-content: space-around;
   font-size: 26px;
-  background: rgba(255,255,255,0.2); 
+  background: rgb(92,194,255); 
   .tab-item
     display: inline-block;
     color: #3d3d3d;
